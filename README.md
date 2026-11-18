@@ -98,3 +98,27 @@ quasar dev -m cordova -T android
 ```bash
 quasar build -m cordova -T android
 ```
+
+## Project structure
+
+```
+qwitter-fork/
+├── public/              # Static assets served as-is (favicon, icons)
+├── src/
+│   ├── assets/          # Processed assets (images, fonts imported by components)
+│   ├── boot/            # Quasar boot files (Firebase initialisation, etc.)
+│   ├── css/             # Global styles (app.sass / quasar.variables.sass)
+│   ├── layouts/         # Page shell components (e.g. MainLayout.vue)
+│   ├── pages/           # Route-level Vue components (one file per page)
+│   ├── router/          # Vue Router configuration (routes.js, index.js)
+│   ├── App.vue          # Root Vue component
+│   └── index.template.html  # HTML template used by Quasar CLI during build
+├── src-cordova/         # Cordova project for iOS & Android builds
+├── src-electron/        # Electron main-process files for desktop builds
+├── quasar.conf.js       # Quasar CLI configuration (plugins, build targets, etc.)
+├── babel.config.js      # Babel transpilation settings
+├── .editorconfig        # Editor formatting rules
+└── CONTRIBUTING.md      # How to set up & contribute to this project
+```
+
+> **New here?** See [CONTRIBUTING.md](CONTRIBUTING.md) for a step-by-step local setup guide.
