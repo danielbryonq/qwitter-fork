@@ -6,7 +6,10 @@
   "author": "Danny Connell",
   "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "jest --ci",
+    "test:unit": "jest",
+    "test:unit:watch": "jest --watch",
+    "test:unit:coverage": "jest --coverage"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -17,6 +20,8 @@
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",
+    "@quasar/quasar-app-extension-testing-unit-jest": "^2.2.5",
+    "babel-preset-current-node-syntax": "1.0.1",
     "devtron": "^1.4.0",
     "electron": "^9.4.1",
     "electron-debug": "^3.2.0",
