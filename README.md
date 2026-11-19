@@ -98,3 +98,16 @@ quasar dev -m cordova -T android
 ```bash
 quasar build -m cordova -T android
 ```
+
+## Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. **Fork** the repository and create your branch from `master`.
+2. **Clone** your fork locally and install dependencies with `npm install`.
+3. **Make your changes** — bug fixes, new features, or documentation improvements are all appreciated.
+4. **Test** your changes to make sure nothing is broken.
+5. **Commit** your changes with a clear and descriptive commit message.
+6. **Open a Pull Request** against the `master` branch and describe what you changed and why.
+
+Please follow the existing code style and keep pull requests focused on a single change. For major changes, consider opening an issue first to discuss your proposal.
