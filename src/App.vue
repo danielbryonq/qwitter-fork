@@ -3,8 +3,15 @@
     <router-view />
   </div>
 </template>
+
 <script>
+import { initTheme } from './store/theme'
+
 export default {
-  name: 'App'
+  name: 'App',
+
+  mounted () {
+    initTheme()
+  }
 }
 </script>
