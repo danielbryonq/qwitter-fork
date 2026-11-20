@@ -1,1 +1,9 @@
 // app global css in Sass form
+
+// Dark mode body background (Quasar sets .body--dark on <body>)
+.body--dark
+  background-color: $dark
+
+// Ensure the page container fills the dark background
+.body--dark .q-page
+  background-color: $dark

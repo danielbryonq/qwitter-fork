@@ -35,7 +35,6 @@
 
       <q-separator
         class="divider"
-        color="grey-2"
         size="10px"
       />
 
@@ -114,20 +113,7 @@ export default {
   data() {
     return {
       newQweetContent: '',
-      qweets: [
-        // {
-        //   id: 'ID1',
-        //   content: 'Be your own hero, its cheaper than a movie ticket.',
-        //   date: 1611653238221,
-        //   liked: false
-        // },
-        // {
-        //   id: 'ID2',
-        //   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat justo id viverra consequat. Integer feugiat lorem faucibus est ornare scelerisque. Donec tempus, nunc vitae semper sagittis, odio magna semper ipsum, et laoreet sapien mauris vitae arcu.',
-        //   date: 1611653252444,
-        //   liked: true
-        // },
-      ]
+      qweets: []
     }
   },
   methods: {
@@ -137,7 +123,6 @@ export default {
         date: Date.now(),
         liked: false
       }
-      // this.qweets.unshift(newQweet)
       db.collection('qweets').add(newQweet).then(function(docRef) {
         console.log('Document written with ID: ', docRef.id)
       }).catch(function(error) {
@@ -160,7 +145,6 @@ export default {
         console.log('Document successfully updated!')
       })
       .catch(function(error) {
-        // The document probably doesn't exist.
         console.error('Error updating document: ', error)
       })
     }
@@ -204,8 +188,12 @@ export default {
   border-top: 1px solid
   border-bottom: 1px solid
   border-color: $grey-4
+.body--dark .divider
+  border-color: $grey-8
 .qweet:not(:first-child)
   border-top: 1px solid rgba(0, 0, 0, 0.12)
+.body--dark .qweet:not(:first-child)
+  border-top: 1px solid rgba(255, 255, 255, 0.1)
 .qweet-content
   white-space: pre-line
 .qweet-icons

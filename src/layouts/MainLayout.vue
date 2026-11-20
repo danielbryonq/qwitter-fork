@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHr lpR fFf">
 
-    <q-header bordered class="bg-white text-black">
+    <q-header bordered :class="$q.dark.isActive ? 'bg-dark text-white' : 'bg-white text-black'">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="left = !left" />
 
@@ -14,6 +14,16 @@
             color="primary"
           />
         </q-toolbar-title>
+
+        <!-- Dark / Light mode toggle -->
+        <q-btn
+          dense
+          flat
+          round
+          :icon="$q.dark.isActive ? 'brightness_7' : 'brightness_2'"
+          :aria-label="$q.dark.isActive ? 'Switch to light mode' : 'Switch to dark mode'"
+          @click="toggleDarkMode"
+        />
 
       </q-toolbar>
     </q-header>
@@ -124,11 +134,31 @@
 </template>
 
 <script>
+const DARK_MODE_KEY = 'qwitter-dark-mode'
+
 export default {
   data () {
     return {
       left: false,
       right: false
+    }
+  },
+
+  mounted () {
+    // Restore persisted preference, or fall back to system preference
+    const stored = localStorage.getItem(DARK_MODE_KEY)
+    if (stored !== null) {
+      this.$q.dark.set(stored === 'true')
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      this.$q.dark.set(prefersDark)
+    }
+  },
+
+  methods: {
+    toggleDarkMode () {
+      this.$q.dark.toggle()
+      localStorage.setItem(DARK_MODE_KEY, String(this.$q.dark.isActive))
     }
   }
 }
