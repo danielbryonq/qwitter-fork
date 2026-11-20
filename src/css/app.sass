@@ -1,1 +1,31 @@
 // app global css in Sass form
+
+// Light theme (default)
+[data-theme="light"]
+  --bg-primary: #ffffff
+  --bg-secondary: #f5f8fa
+  --bg-hover: #e8f5fe
+  --text-primary: #14171a
+  --text-secondary: #657786
+  --border-color: #e1e8ed
+  --header-bg: #ffffff
+  --drawer-bg: #ffffff
+  --icon-color: #657786
+
+// Dark theme
+[data-theme="dark"]
+  --bg-primary: #15202b
+  --bg-secondary: #192734
+  --bg-hover: #1e2f3f
+  --text-primary: #ffffff
+  --text-secondary: #8899a6
+  --border-color: #38444d
+  --header-bg: #15202b
+  --drawer-bg: #15202b
+  --icon-color: #8899a6
+
+// Apply variables to body
+body
+  background-color: var(--bg-primary)
+  color: var(--text-primary)
+  transition: background-color 0.3s ease, color 0.3s ease
