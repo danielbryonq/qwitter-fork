@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHr lpR fFf">
 
-    <q-header bordered class="bg-white text-black">
+    <q-header bordered class="layout-header">
       <q-toolbar>
         <q-btn dense flat round icon="menu" @click="left = !left" />
 
@@ -15,6 +15,14 @@
           />
         </q-toolbar-title>
 
+        <q-btn
+          dense
+          flat
+          round
+          :icon="isDark ? 'wb_sunny' : 'nights_stay'"
+          :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+          @click="toggleTheme"
+        />
       </q-toolbar>
     </q-header>
 
@@ -24,6 +32,7 @@
       :width="283"
       bordered
       show-if-above
+      class="layout-drawer"
     >
       <q-icon
         class="q-pa-md"
@@ -38,6 +47,7 @@
           v-ripple
           clickable
           exact
+          class="drawer-item"
         >
           <q-item-section avatar>
             <q-icon name="home" size="md" />
@@ -50,6 +60,7 @@
           v-ripple
           clickable
           exact
+          class="drawer-item"
         >
           <q-item-section avatar>
             <q-icon name="help" size="md" />
@@ -61,7 +72,7 @@
 
     </q-drawer>
 
-    <q-drawer show-if-above v-model="right" side="right" bordered>
+    <q-drawer show-if-above v-model="right" side="right" bordered class="layout-drawer">
       <q-input
         placeholder="Search Qwitter"
         class="q-ma-md"
@@ -124,12 +135,24 @@
 </template>
 
 <script>
+import themeState, { toggleTheme } from '../store/theme'
+
 export default {
   data () {
     return {
       left: false,
       right: false
     }
+  },
+
+  computed: {
+    isDark () {
+      return themeState.isDark
+    }
+  },
+
+  methods: {
+    toggleTheme
   }
 }
 </script>
@@ -140,4 +163,19 @@ export default {
   bottom: 0
   left: 50%
   transform: translateX(-50%)
+
+.layout-header
+  background-color: var(--header-bg) !important
+  color: var(--text-primary) !important
+  transition: background-color 0.3s ease, color 0.3s ease
+
+.layout-drawer
+  background-color: var(--drawer-bg) !important
+  color: var(--text-primary) !important
+  transition: background-color 0.3s ease, color 0.3s ease
+
+.drawer-item
+  color: var(--text-primary) !important
+  &:hover
+    background-color: var(--bg-hover) !important
 </style>
