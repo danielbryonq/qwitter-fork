@@ -12,17 +12,21 @@ Add a light/dark mode toggle to Qwitter so users can switch between a light them
 ## Components Changed
 | File | Change |
 |------|--------|
-| `quasar.conf.js` | Enable the `Dark` Quasar plugin |
-| `src/layouts/MainLayout.vue` | Add toggle button in header; init dark mode on mount |
-| `src/css/app.sass` | Dark-mode-aware CSS custom properties for colours that Quasar doesn't cover automatically |
-| `src/pages/PageHome.vue` | Remove hard-coded `color="grey-2"` on divider; rely on theme |
+| `quasar.conf.js` | Added `'Dark'` to the `plugins` array to enable the Quasar Dark plugin |
+| `src/layouts/MainLayout.vue` | Added `brightness_7` / `brightness_2` icon toggle button in toolbar; `mounted()` reads `localStorage` / `prefers-color-scheme` to init; `toggleDarkMode()` method calls `$q.dark.toggle()` and saves to `localStorage` |
+| `src/pages/PageHome.vue` | Removed hard-coded `color="grey-2"` on the `<q-separator>`; added `.body--dark` SASS overrides for divider and tweet-border colours |
+| `src/css/app.sass` | Added `.body--dark` body/page background override |
 
 ## Behaviour
-- **Default**: respects system `prefers-color-scheme`.
-- **Toggle**: clicking the sun (light) or moon (dark) icon in the top-right of the header switches modes.
-- **Persistence**: choice stored in `localStorage` under the key `qwitter-dark-mode`.
-- When dark mode is active, the entire UI — header, drawers, tweet list, inputs — uses Quasar's built-in dark palette.
+- **Default**: respects system `prefers-color-scheme` on first visit.
+- **Toggle**: clicking the sun (light) or moon (dark) icon in the top-right of the header switches modes instantly.
+- **Persistence**: choice stored in `localStorage` under the key `qwitter-dark-mode`; restored on next page load.
+- When dark mode is active, Quasar automatically handles the majority of component theming via its built-in dark palette; custom overrides handle dividers, borders and backgrounds.
 
-## Out of Scope
+## Implementation Notes
+- `NODE_OPTIONS=--openssl-legacy-provider` is required to run the dev server on Node 17+ (pre-existing project constraint).
+- The `$q.dark` plugin must be listed in `quasar.conf.js → framework.plugins` before it is accessible via `this.$q.dark`.
+
+## Out of Scope (Deferred)
 - Per-user server-side preference storage.
 - Custom colour palette beyond Quasar's dark mode defaults.
